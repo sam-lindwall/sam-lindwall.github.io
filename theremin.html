@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embedded Theremin | Sam Lindwall</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="name" href="index.html">Sam Lindwall</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html" class="here">Projects</a>
+      <a href="goals.html">Career Goals</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+<p><a href="projects.html">&larr; All projects</a></p>
+<h1>Embedded theremin</h1>
+<p class="sub">ECE 1100 Discovery Project &middot; Fall 2026 &middot; <span class="status">in progress</span></p>
+
+<div class="placeholder">Photo of the prototype coming soon.</div>
+
+<h2>The problem</h2>
+<p>A theremin is an instrument you play without touching it. You move one hand toward an antenna to raise the pitch and the other toward a second antenna to change the volume. Inside, the antenna is part of an oscillator circuit. Your hand adds a tiny bit of capacitance, which shifts the oscillator's frequency slightly, and the instrument turns that shift into an audible note.</p>
+<p>I wanted to build one from the ground up with a microcontroller doing the work in the middle. That turns it into a real embedded problem: measure a very small physical change, convert it into a clean number fast enough that it doesn't sound laggy, and generate audio on a strict deadline. If the measurement is noisy, the note wobbles. If the processing is slow, the player feels the delay right away.</p>
+<p>I picked this project for two reasons. First, I play music, and a theremin is an instrument where the engineering and the playing are tied together. Second, it fills gaps in what I know. My tracking robot taught me control loops and sensor timing, but I haven't worked with audio, filtering, or a real-time operating system yet. The theremin needs all of those.</p>
+
+<h2>The process</h2>
+<p>I'm building it in stages so that each step works and gets measured before I add the next one. That's what worked on my tracking robot, where I learned that it's much easier to find a problem when you only changed one thing.</p>
+<ol>
+  <li><strong>Sense.</strong> Build the pitch oscillator and measure its frequency on a Raspberry Pi Pico 2 W using a PWM slice as an edge counter. Log the raw readings over serial and look at noise and drift in Python as my hand moves.</li>
+  <li><strong>Sound.</strong> Generate a stable tone in firmware and get it out through a small amplifier and speaker.</li>
+  <li><strong>Play.</strong> Connect the two: map hand distance to pitch and filter the reading so the note glides instead of stepping or jittering.</li>
+  <li><strong>Volume.</strong> Add the second antenna so the other hand controls loudness, like a real theremin.</li>
+  <li><strong>Rebuild.</strong> Move the code onto an RTOS with separate sensing and audio tasks, and put it in an enclosure.</li>
+</ol>
+<p>The part I expect to be hardest is the first stage. The frequency change from a hand is small compared to the oscillator's base frequency, so I need to measure over a long enough window to be precise without making the response slow. Getting that tradeoff right is basically the whole instrument.</p>
+
+<h2>The outcome</h2>
+<p>I haven't started the hardware yet, so this section will fill in as I go. My goal for this semester is to reach stage 3, a playable prototype where moving my hand changes the pitch smoothly. When I get there I'll report actual numbers here: the usable pitch range, how much the pitch jitters when my hand is still, and how long it takes from moving my hand to hearing the change. I'll also write up what went wrong along the way, since that's usually where I learn the most.</p>
+<p>Code will go on my <a href="https://github.com/sam-lindwall">GitHub</a> once there's something worth sharing.</p>
+
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    Sam Lindwall &middot; <a href="mailto:slindwall3@gatech.edu">slindwall3@gatech.edu</a> &middot; <a href="https://github.com/sam-lindwall">GitHub</a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Sam Lindwall</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="name" href="index.html">Sam Lindwall</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html" class="here">Projects</a>
+      <a href="goals.html">Career Goals</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+<h1>Projects</h1>
+<p class="sub">Newest first. I'll keep adding to this as I go.</p>
+
+<div class="card">
+  <h3><a href="theremin.html">Embedded theremin</a> <span class="status">Discovery Project &middot; in progress</span></h3>
+  <p class="tags">Fall 2026 &middot; C &middot; Raspberry Pi Pico 2 W &middot; signal processing &middot; audio</p>
+  <p>A theremin you play by moving your hand near an antenna, built from a microcontroller up. The goal is to sense a tiny change in an oscillator's frequency, turn it into a clean pitch, and generate audio with no noticeable lag. <a href="theremin.html">Read the full write-up &rarr;</a></p>
+</div>
+
+<div class="card">
+  <h3>Vision-based tracking robot</h3>
+  <p class="tags">Summer 2026 &middot; C &middot; Python &middot; STM32 &middot; Raspberry Pi 5 &middot; UART &middot; I&sup2;C &middot; PID &middot; <a href="https://github.com/sam-lindwall/turret-v2">code</a></p>
+  <p>A pan/tilt robot that follows your hand. A Raspberry Pi 5 runs YOLO hand detection on the Pi Camera feed and sends target angles over UART to an STM32 Nucleo-F446RE, which runs a 160 Hz PID loop on two DC gearmotors with absolute encoders read over I&sup2;C. All the firmware is bare-metal C.</p>
+  <p>The main problem was that the turret kept hunting back and forth around the target. It turned out the camera frame and the encoder reading were from slightly different moments, so I estimated where the camera actually was when each frame was captured. That fixed the hunting without adding delay. Adding measured friction feedforward cut steady-state error from 4&deg; to 1&deg;, and gating the deadband on target velocity raised motor engagement during tracking from 38% to 98%.</p>
+</div>
+
+<div class="card">
+  <h3>"The Lick" melody generator</h3>
+  <p class="tags">Fall 2025 &middot; Verilog &middot; Basys2 FPGA &middot; <a href="https://github.com/sam-lindwall/verilog-buzzer-lick">code</a></p>
+  <p>A finite-state machine in Verilog that plays the famous jazz lick on a piezo buzzer. I built clock dividers and counters off the 50 MHz system clock to generate each note's square wave and time the notes in 0.2 s steps.</p>
+</div>
+
+<div class="card">
+  <h3>Joystick mouse with bite switch</h3>
+  <p class="tags">Tikkun Olam Makers &middot; assistive technology &middot; CAD &middot; electronics</p>
+  <p>An adapted computer input device built with Tikkun Olam Makers: a joystick for moving the cursor and a switch you bite to click. I designed the bite switch around a limit switch, modeled it in CAD, and did the wiring. The result let him set up and run his podcast on his own.</p>
+</div>
+
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    Sam Lindwall &middot; <a href="mailto:slindwall3@gatech.edu">slindwall3@gatech.edu</a> &middot; <a href="https://github.com/sam-lindwall">GitHub</a>
+  </div>
+</footer>
+</body>
+</html>
